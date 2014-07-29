@@ -1,7 +1,7 @@
-package coffeemachine.thirdparties;
+package coffeemachine.app;
 
 /**
  * @author <a href="http://twitter.com/aloyer">@aloyer</a>
  */
-public class EmailService {
+public class DrinkDispenser {
 }

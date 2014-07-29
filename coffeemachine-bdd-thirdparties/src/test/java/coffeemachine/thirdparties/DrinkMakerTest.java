@@ -23,7 +23,11 @@ public class DrinkMakerTest {
             "P:2:0"
     })
     public void valid_command_should_not_throw_any_exception(String command) {
-        new DrinkMaker().checkCommand(command);
+        new DrinkMaker() {
+            @Override
+            void waitALittle(int durationInMillis) {
+            }
+        }.checkCommand(command);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -39,6 +43,10 @@ public class DrinkMakerTest {
             "C:1:1"
     })
     public void invalid_command_should_throw_an_exception(String command) {
-        new DrinkMaker().checkCommand(command);
+        new DrinkMaker() {
+            @Override
+            void waitALittle(int durationInMillis) {
+            }
+        }.checkCommand(command);
     }
 }
