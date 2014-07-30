@@ -16,7 +16,7 @@ public class BeverageQuantityChecker {
 
     public BeverageQuantityChecker() {
         infoLn("Registering in the Object Naming service");
-        infoLn("Waiting for identifier ");
+        infoLn("Waiting for identifier ...");
     }
 
     private Map<String, Quantity> loadStock() {
