@@ -1,5 +1,8 @@
 package coffeemachine.thirdparties;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static coffeemachine.thirdparties.Out.*;
@@ -18,11 +21,11 @@ public class DrinkMaker {
         if (command.startsWith("M:")) {
             sendMessage(command);
         } else {
-            prepareDrink();
+            prepareDrink(command);
         }
     }
 
-    private void prepareDrink() {
+    void prepareDrink(String command) {
         info("Preparing drink ");
         for (int i = 0; i < 10; i++) {
             info(".");
@@ -30,6 +33,57 @@ public class DrinkMaker {
         }
         newLn();
         info("Drink ready...");
+
+        //
+        transactionLog().add(decodeDrink(command));
+    }
+
+    private String decodeDrink(String command) {
+        StringBuilder b = new StringBuilder();
+
+        Pattern p = Pattern.compile("(.*):(.*):(.*)");
+        Matcher matcher = p.matcher(command);
+        if(!matcher.matches())
+            throw new IllegalArgumentException("Invalid command");
+
+        String drinkType = matcher.group(1);
+        String nbSugars = matcher.group(2);
+
+        if (drinkType.startsWith("C")) {
+            b.append("Coffee");
+        } else if (drinkType.startsWith("H")) {
+            b.append("Chocolate");
+        } else if (drinkType.startsWith("O")) {
+            b.append("Orange juice");
+        } else if (drinkType.startsWith("T")) {
+            b.append("Tea");
+        } else if (drinkType.startsWith("P")) {
+            b.append("Tomato potage");
+        }
+
+        b.append(";");
+        if (drinkType.endsWith("h"))
+            b.append("extra hot");
+        else
+            b.append("normal");
+
+        b.append(";");
+        if (nbSugars.equals("1"))
+            b.append("1").append(";stick");
+        else if (nbSugars.equals("2"))
+            b.append("2").append(";stick");
+        else
+            b.append("0").append(";no-stick");
+
+        return b.toString();
+    }
+
+    private List<String> txLog;
+
+    public List<String> transactionLog() {
+        if (txLog == null)
+            txLog = new ArrayList<String>();
+        return txLog;
     }
 
     private void sendMessage(String command) {
