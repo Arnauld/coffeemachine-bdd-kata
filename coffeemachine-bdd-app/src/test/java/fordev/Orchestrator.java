@@ -1,6 +1,6 @@
 package fordev;
 
-import coffeemachine.thirdparties.DrinkMaker;
+import coffeemachine.thirdparties.impl.DrinkMaker;
 
 /**
  * @author <a href="http://twitter.com/aloyer">@aloyer</a>

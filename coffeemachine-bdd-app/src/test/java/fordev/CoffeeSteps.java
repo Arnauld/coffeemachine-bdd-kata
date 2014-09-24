@@ -1,12 +1,11 @@
 package fordev;
 
-import coffeemachine.thirdparties.DrinkMaker;
+import coffeemachine.thirdparties.impl.DrinkMaker;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.mockito.Mockito;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
