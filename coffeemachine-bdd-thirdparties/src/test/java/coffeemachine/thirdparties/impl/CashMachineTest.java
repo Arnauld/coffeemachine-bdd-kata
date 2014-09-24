@@ -1,6 +1,7 @@
-package coffeemachine.thirdparties;
+package coffeemachine.thirdparties.impl;
 
 import org.assertj.core.data.Offset;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,6 +13,11 @@ import static org.assertj.core.data.Offset.offset;
 public class CashMachineTest {
 
     public static final Offset<Double> EPS = offset(0.001);
+
+    @BeforeClass
+    public static void processing() {
+        Processing.none();
+    }
 
     @Test
     public void usecase () {
