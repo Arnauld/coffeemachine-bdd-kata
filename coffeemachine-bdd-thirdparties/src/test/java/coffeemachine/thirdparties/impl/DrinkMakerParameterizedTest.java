@@ -1,7 +1,8 @@
-package coffeemachine.thirdparties;
+package coffeemachine.thirdparties.impl;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -9,6 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
 public class DrinkMakerParameterizedTest {
+
+    @BeforeClass
+    public static void processing() {
+        Processing.none();
+    }
 
     @Test
     @Parameters({
@@ -25,11 +31,7 @@ public class DrinkMakerParameterizedTest {
             "P:2:0"
     })
     public void valid_command_should_not_throw_any_exception(String command) {
-        new DrinkMaker() {
-            @Override
-            void waitALittle(int durationInMillis) {
-            }
-        }.checkCommand(command);
+        new DrinkMaker().checkCommand(command);
     }
 
     @Test
@@ -47,11 +49,7 @@ public class DrinkMakerParameterizedTest {
             "P:2:0"
     })
     public void valid_command_should_be_appended(String command) {
-        DrinkMaker drinkMaker = new DrinkMaker() {
-            @Override
-            void waitALittle(int durationInMillis) {
-            }
-        };
+        DrinkMaker drinkMaker = new DrinkMaker();
         drinkMaker.prepareDrink(command);
         assertThat(drinkMaker.transactionLog()).isNotEmpty();
     }
@@ -69,10 +67,6 @@ public class DrinkMakerParameterizedTest {
             "C:1:1"
     })
     public void invalid_command_should_throw_an_exception(String command) {
-        new DrinkMaker() {
-            @Override
-            void waitALittle(int durationInMillis) {
-            }
-        }.checkCommand(command);
+        new DrinkMaker().checkCommand(command);
     }
 }

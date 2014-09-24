@@ -1,8 +1,9 @@
-package coffeemachine.thirdparties;
+package coffeemachine.thirdparties.impl;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,6 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IntegrationTest {
 
     private DrinkMaker drinkMaker;
+
+    @BeforeClass
+    public static void processing() {
+        Processing.none();
+    }
 
     @Before
     public void setUp() {
@@ -38,7 +44,7 @@ public class IntegrationTest {
     @Parameters({
             "0.0",
             "0.1",
-            "10.0",
+            "10.0"
     })
     public void cashMachine__missingMoney__no_money_inserted(double missingAndExpected) {
         CashMachine cashMachine = new CashMachine();

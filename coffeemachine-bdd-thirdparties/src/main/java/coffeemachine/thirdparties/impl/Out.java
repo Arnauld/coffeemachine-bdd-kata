@@ -1,4 +1,4 @@
-package coffeemachine.thirdparties;
+package coffeemachine.thirdparties.impl;
 
 /**
  * @author <a href="http://twitter.com/aloyer">@aloyer</a>
